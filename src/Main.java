@@ -1,7 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        final String appName = "Biblioteka v0.1";
+        final String appName = "Biblioteka v0.2";
 
 
 
