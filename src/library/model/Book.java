@@ -1,21 +1,28 @@
+package library.model;
+
 public class Book {
     private String title;
     private String author;
-    ;
     private int yearOfPublishmen;
     private int numberOfPages;
     private String publishingHouse;
     private String isbnNumber;
 
-    public Book(String title, String author, int yearOfPublishmen, int numberOfPages, String publishingHouse,
-                String isbnNumber) {
+
+    public Book(String title, String author, int yearOfPublishmen, int numberOfPages, String publishingHouse, String isbnNumber) {
+        this(title,author,yearOfPublishmen,numberOfPages,publishingHouse);
+        this.isbnNumber = isbnNumber;
+    }
+
+    public Book(String title, String author, int yearOfPublishmen, int numberOfPages, String publishingHouse) {
         this.title = title;
         this.author = author;
         this.yearOfPublishmen = yearOfPublishmen;
         this.numberOfPages = numberOfPages;
         this.publishingHouse = publishingHouse;
-        this.isbnNumber = isbnNumber;
     }
+
+
 
     public String getTitle() {
         return title;
