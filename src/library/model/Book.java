@@ -75,7 +75,13 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
+
+        String info;
+        if (isbnNumber==null){
+            isbnNumber= "";
+        }
+
+        info="Book{" +
                 "title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", yearOfPublishmen=" + yearOfPublishmen +
@@ -83,5 +89,11 @@ public class Book {
                 ", publishingHouse='" + publishingHouse + '\'' +
                 ", isbnNumber='" + isbnNumber + '\'' +
                 '}';
-    }
+
+
+
+        return  info;
+
+
+   }
 }

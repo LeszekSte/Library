@@ -15,8 +15,7 @@ public class Library {
         String publishingHouse = "Helios";
         String isbnNumber = "65464567414";
 
-        Book book = new Book(title, author, yearOfPublishmen, numberOfPages, publishingHouse,
-                isbnNumber);
+        Book book = new Book(title, author, yearOfPublishmen, numberOfPages, publishingHouse);
         Book book1 = new Book(title, author, yearOfPublishmen, numberOfPages, publishingHouse,
                 isbnNumber);
 
