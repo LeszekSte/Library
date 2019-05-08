@@ -10,7 +10,7 @@ public class Book {
 
 
     public Book(String title, String author, int yearOfPublishmen, int numberOfPages, String publishingHouse, String isbnNumber) {
-        this(title,author,yearOfPublishmen,numberOfPages,publishingHouse);
+        this(title, author, yearOfPublishmen, numberOfPages, publishingHouse);
         this.isbnNumber = isbnNumber;
     }
 
@@ -21,7 +21,6 @@ public class Book {
         this.numberOfPages = numberOfPages;
         this.publishingHouse = publishingHouse;
     }
-
 
 
     public String getTitle() {
@@ -75,13 +74,12 @@ public class Book {
 
     @Override
     public String toString() {
-
         String info;
-        if (isbnNumber==null){
-            isbnNumber= "";
+        if (isbnNumber == null) {
+            isbnNumber = "";
         }
 
-        info="Book{" +
+        info = "Book{" +
                 "title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", yearOfPublishmen=" + yearOfPublishmen +
@@ -89,11 +87,6 @@ public class Book {
                 ", publishingHouse='" + publishingHouse + '\'' +
                 ", isbnNumber='" + isbnNumber + '\'' +
                 '}';
-
-
-
-        return  info;
-
-
-   }
+        return info;
+    }
 }
