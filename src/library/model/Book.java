@@ -1,34 +1,16 @@
 package library.model;
 
-public class Book {
-    private String title;
+public class Book extends Publication {
     private String author;
-    private int yearOfPublishmen;
-    private int numberOfPages;
-    private String publishingHouse;
-    private String isbnNumber;
+    private int pages;
+    private String isbn;
 
 
-    public Book(String title, String author, int yearOfPublishmen, int numberOfPages, String publishingHouse, String isbnNumber) {
-        this(title, author, yearOfPublishmen, numberOfPages, publishingHouse);
-        this.isbnNumber = isbnNumber;
-    }
-
-    public Book(String title, String author, int yearOfPublishmen, int numberOfPages, String publishingHouse) {
-        this.title = title;
+    public Book(String title, String author, int year, int pages, String publisher, String isbn) {
+        super(year,title,publisher);
         this.author = author;
-        this.yearOfPublishmen = yearOfPublishmen;
-        this.numberOfPages = numberOfPages;
-        this.publishingHouse = publishingHouse;
-    }
-
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+        this.pages = pages;
+        this.isbn = isbn;
     }
 
     public String getAuthor() {
@@ -39,54 +21,28 @@ public class Book {
         this.author = author;
     }
 
-    public int getYearOfPublishmen() {
-        return yearOfPublishmen;
+    public int getPages() {
+        return pages;
     }
 
-    public void setYearOfPublishmen(int yearOfPublishmen) {
-        this.yearOfPublishmen = yearOfPublishmen;
+    public void setPages(int pages) {
+        this.pages = pages;
     }
 
-    public int getNumberOfPages() {
-        return numberOfPages;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setNumberOfPages(int numberOfPages) {
-        this.numberOfPages = numberOfPages;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
-
-    public String getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public void setPublishingHouse(String publishingHouse) {
-        this.publishingHouse = publishingHouse;
-    }
-
-    public String getIsbnNumber() {
-        return isbnNumber;
-    }
-
-    public void setIsbnNumber(String isbnNumber) {
-        this.isbnNumber = isbnNumber;
-    }
-
 
     @Override
     public String toString() {
-        String info;
-        if (isbnNumber == null) {
-            isbnNumber = "";
-        }
-
-        info = "Book{" +
-                "title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", yearOfPublishmen=" + yearOfPublishmen +
-                ", numberOfPages=" + numberOfPages +
-                ", publishingHouse='" + publishingHouse + '\'' +
-                ", isbnNumber='" + isbnNumber + '\'' +
+        return "Book{" + getTitle() + " " + getYear() + " " + getPublisher() + " " +
+                "author='" + author + '\'' +
+                ", pages=" + pages +
+                ", isbn='" + isbn + '\'' +
                 '}';
-        return info;
     }
 }

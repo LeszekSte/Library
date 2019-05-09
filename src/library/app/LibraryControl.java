@@ -3,12 +3,16 @@ package library.app;
 import library.io.DataReader;
 import library.model.Book;
 import library.model.Library;
+import library.model.Magazine;
 
 public class LibraryControl {
     // zmienne do kontrolowania programu
-    private final int exit = 0;
-    private final int addBook = 1;
-    private final int printBooks = 2;
+    private static final int EXIT = 0;
+    private static final int ADD_BOOK = 1;
+    private static final int ADD_MAGAZINE = 2;
+
+    private static final int PRINTS_BOOKS = 3;
+    private static final int PRINTS_MAGZINE = 4;
 
     // zmienna do komunikacji z użytkownikiem
     private DataReader dataReader = new DataReader();
@@ -27,24 +31,44 @@ public class LibraryControl {
             printOptions();
             option = dataReader.getInt();
             switch (option) {
-                case addBook:
+                case ADD_BOOK:
                     addBook();
                     break;
-                case printBooks:
+                case ADD_MAGAZINE:
+                    addMagazine();
+                    break;
+                case PRINTS_BOOKS:
                     printBooks();
                     break;
-                case exit:
+
+                case PRINTS_MAGZINE:
+                    printMagazines();
+                    break;
+
+                case EXIT:
                     exit();
                     break;
                 default:
                     System.out.println("Nie ma tekiej opcji");
             }
-        } while (option != exit);
+        } while (option != EXIT);
 
 
     }
 
-    private void printBooks() {
+
+
+    private void addMagazine() {
+        Magazine magazine = dataReader.readAndCreateMagazine();
+        library.addMagazine(magazine);
+    }
+
+    private void printMagazines() {
+        library.printMagazines();
+    }
+
+    private void printBooks()
+    {
         library.printBooks();
     }
 
@@ -55,9 +79,11 @@ public class LibraryControl {
 
     private void printOptions() {
         System.out.println("Wybierz opcję: ");
-        System.out.println(exit + " - wyjście z programu");
-        System.out.println(addBook + " - dodanie nowej książki");
-        System.out.println(printBooks + " - wyświetl dostępne książki");
+        System.out.println(EXIT + " - wyjście z programu");
+        System.out.println(ADD_BOOK + " - dodanie nowej książki");
+        System.out.println(ADD_MAGAZINE + " - dodanie nowego magazynu");
+        System.out.println(PRINTS_BOOKS + " - wyświetl dostępne książki");
+        System.out.println(PRINTS_MAGZINE + " - wyświetl dostępne magazyny");
     }
 
 

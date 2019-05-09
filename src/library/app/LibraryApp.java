@@ -5,16 +5,20 @@ import library.model.Book;
 
 public class LibraryApp {
 
+    private final static   String APP_NAME = "Biblioteka v11";
+
     public static void main(String[] args) {
-        final String appName = "Biblioteka v0.9";
-        System.out.println(appName);
-//        books[0] = new Book("W pustyni i w puszczy", "Heniek", 1870, 300, "Agora", "1654636");
-//        books[1] = new Book("W pustyni", "Wojtek", 1900, 500, "Helios", "16546654636");
-//        books[2] = new Book("W Ameryce", "Marek", 2055, 301, "TomCat", "5461654636");
-
-        LibraryControl libraryControl = new LibraryControl();
-        libraryControl.controlLoop();
-
+        System.out.println(APP_NAME);
+        LibraryControl libControl = new LibraryControl();
+        libControl.controlLoop();
     }
 }
 
+//    Klasa może zawierać pola i metody statyczne.
+//        Pola statyczne najczęściej będą połączone ze słowem final i będziemy je wtedy nazywali stałymi.
+//        Stałe nazywamy WIELKIMI_LITERAMI.
+
+//        Pola statyczne istnieją tylko w jednym egzemplarzu w ramach całej aplikacji
+//        i powiązane są z klasą, niezależnie od tego ile obiektów danej klasy utworzysz.
+
+//        Metody statyczne mogą się odwoływać tylko do innych składowych statycznych
