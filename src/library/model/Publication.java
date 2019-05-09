@@ -36,4 +36,12 @@ package library.model;
             this.publisher = publisher;
         }
 
-}
+        @Override
+        public String toString() {
+            return "Publication{" +
+                    "year=" + year +
+                    ", title='" + title + '\'' +
+                    ", publisher='" + publisher + '\'' +
+                    '}';
+        }
+    }

@@ -38,7 +38,7 @@ public class Magazine extends Publication {
 
     @Override
     public String toString() {
-        return "Magazine{ " +
+        return super.toString() + "Magazine{ " +
                 "month=" + month +
                 ", day=" + day +
                 ", language='" + language + '\'' +
