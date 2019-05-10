@@ -42,7 +42,6 @@ public class Library {
             System.out.println("Brak magazynów w bibliotece");
         }
         for (int i = 0; i < publicationsNumber; i++) {
-
             if (publications[i] instanceof Magazine) {
                 System.out.println(publications[i].toString());
                 countMagazine++;

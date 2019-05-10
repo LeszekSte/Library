@@ -1,5 +1,7 @@
 package library.model;
 
+import java.util.Objects;
+
 public class Magazine extends Publication {
     private int month;
     private int day;
@@ -43,5 +45,21 @@ public class Magazine extends Publication {
                 ", day=" + day +
                 ", language='" + language + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Magazine)) return false;
+        if (!super.equals(o)) return false;
+        Magazine magazine = (Magazine) o;
+        return getMonth() == magazine.getMonth() &&
+                getDay() == magazine.getDay() &&
+                Objects.equals(getLanguage(), magazine.getLanguage());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getMonth(), getDay(), getLanguage());
     }
 }
