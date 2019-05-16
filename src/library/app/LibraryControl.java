@@ -1,22 +1,26 @@
 package library.app;
 
+import library.exception.NoSuchOptionException;
+import library.io.ConsolePrinter;
 import library.io.DataReader;
 import library.model.Book;
 import library.model.Library;
 import library.model.Magazine;
 
+import java.util.InputMismatchException;
+
 public class LibraryControl {
     // zmienne do kontrolowania programu
-    private static final int EXIT = 0;
-    private static final int ADD_BOOK = 1;
-    private static final int ADD_MAGAZINE = 2;
-
-    private static final int PRINTS_BOOKS = 3;
-    private static final int PRINTS_MAGZINE = 4;
+//    private static final int EXIT = 0;
+//    private static final int ADD_BOOK = 1;
+//    private static final int ADD_MAGAZINE = 2;
+//
+//    private static final int PRINTS_BOOKS = 3;
+//    private static final int PRINTS_MAGZINE = 4;
 
     // zmienna do komunikacji z użytkownikiem
-    private DataReader dataReader = new DataReader();
-
+    private ConsolePrinter printer = new ConsolePrinter();
+    private DataReader dataReader = new DataReader(printer);
     // "biblioteka" przechowująca dane
     private Library library = new Library();
 
@@ -29,7 +33,7 @@ public class LibraryControl {
 
         do {
             printOptions();
-            option = Option.createFromInt(dataReader.getInt());
+            option = getOption();
             switch (option) {
                 case ADD_BOOK:
                     addBook();
@@ -52,6 +56,27 @@ public class LibraryControl {
         } while (option != Option.EXIT);
 
 
+    }
+
+    private Option getOption() {
+        boolean optionOk = false;
+        Option option = null;
+        while (!optionOk) {
+            try {
+                try {
+                    option = Option.createFromInt(dataReader.getInt());
+                    optionOk = true;
+                } catch (NoSuchOptionException e) {
+                    printer.printLine(e.getMessage() + " ,podaj ponownie:");
+
+                } catch (InputMismatchException ignore) {
+                    printer.printLine("Wprowadzono warość, która nie jes liczbą, posaj ponownie:");
+                }
+            } finally {
+
+            }
+        }
+        return option;
     }
 
 
