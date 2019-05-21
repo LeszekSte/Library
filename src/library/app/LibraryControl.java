@@ -131,14 +131,7 @@ public class LibraryControl {
             this.value = value;
             this.description = description;
         }
-
-        public int getValue() {
-            return value;
-        }
-
-        public String getDescription() {
-            return description;
-        }
+        
 
         @Override
         public String toString() {
