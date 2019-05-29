@@ -14,7 +14,7 @@ public class FileManagerBuilder {
     }
 
     public FileManager build() {
-        printer.printLine("Wybierz format danych");
+        printer.printLine("Wybierz format danych:");
         FileType fileType = getFileType();
         switch (fileType) {
             case SERIAL:
@@ -34,9 +34,10 @@ public class FileManagerBuilder {
                 result = FileType.valueOf(type);
                 typeOk = true;
             } catch (IllegalArgumentException e) {
-                printer.printLine("Nie obsługiwany typ danych");
+                printer.printLine("Nieobsługiwany typ danych, wybierz ponownie.");
             }
         } while (!typeOk);
+
         return result;
     }
 
@@ -45,6 +46,4 @@ public class FileManagerBuilder {
             printer.printLine(value.name());
         }
     }
-
-
 }

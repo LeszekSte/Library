@@ -3,24 +3,27 @@ package library.model;
 import java.util.Objects;
 
 public class Book extends Publication {
+    // Pola
     private String author;
     private int pages;
     private String isbn;
 
-
-    public Book(String title, String author, int year, int pages, String publisher, String isbn) {
-        super(year,title,publisher);
-        this.author = author;
+    // Konstruktory
+    public Book(String title, String author, int year, int pages, String publisher,
+                String isbn) {
+        super(title, publisher, year);
         this.pages = pages;
+        this.author = author;
         this.isbn = isbn;
     }
 
-    public String getAuthor() {
-        return author;
+    // settery i gettery
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public int getPages() {
@@ -31,36 +34,32 @@ public class Book extends Publication {
         this.pages = pages;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
     public String toString() {
-        return super.toString()+ " Book{" +
-                "author='" + author + '\'' +
-                ", pages=" + pages +
-                ", isbn='" + isbn + '\'' +
-                '}';
+        return super.toString() + author + ", " + pages + ", " + isbn;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Book)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Book book = (Book) o;
-        return getPages() == book.getPages() &&
-                Objects.equals(getAuthor(), book.getAuthor()) &&
-                Objects.equals(getIsbn(), book.getIsbn());
+        return pages == book.pages &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(isbn, book.isbn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getAuthor(), getPages(), getIsbn());
+        return Objects.hash(super.hashCode(), author, pages, isbn);
     }
 }

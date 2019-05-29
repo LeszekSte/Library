@@ -1,35 +1,35 @@
 package library.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Library {
+public class Library implements Serializable {
 
-    private static final int MAX_PUBLICATION = 2000;
-    private Publication[] publications = new Publication[MAX_PUBLICATION];
+    private static final int MAX_PUBLICATONS = 2000;
     private int publicationsNumber;
+    private Publication[] publications = new Publication[MAX_PUBLICATONS];
 
     public Publication[] getPublications() {
         Publication[] result = new Publication[publicationsNumber];
         for (int i = 0; i < publicationsNumber; i++) {
             result[i] = publications[i];
         }
-        return publications;
+        return result;
     }
 
-    public void addBooks(Book book) {
-        addPublcation(book);
+    public void addBook(Book book) {
+        addPublication(book);
     }
 
     public void addMagazine(Magazine magazine) {
-        addPublcation(magazine);
+        addPublication(magazine);
     }
 
-    private void addPublcation(Publication publication) {
-        if (publicationsNumber >= MAX_PUBLICATION) {
-            throw new ArrayIndexOutOfBoundsException("Max publication exceeded " + MAX_PUBLICATION);
+    private void addPublication(Publication publication) {
+        if (publicationsNumber >= MAX_PUBLICATONS) {
+            throw new ArrayIndexOutOfBoundsException("Max publications exceeded " + MAX_PUBLICATONS);
         }
         publications[publicationsNumber] = publication;
         publicationsNumber++;
     }
-
 }

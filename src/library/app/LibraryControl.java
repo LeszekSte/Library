@@ -14,7 +14,7 @@ import library.model.Publication;
 
 import java.util.InputMismatchException;
 
-public class LibraryControl {
+class LibraryControl {
     private ConsolePrinter printer = new ConsolePrinter();
     private DataReader dataReader = new DataReader(printer);
     private FileManager fileManager;
@@ -33,12 +33,7 @@ public class LibraryControl {
         }
     }
 
-
-    /*
-     * Główna metoda programu, która pozwala na wybór opcji i interakcję
-     */
-
-    public void controlLoop() {
+    void controlLoop() {
         Option option;
 
         do {
@@ -61,11 +56,9 @@ public class LibraryControl {
                     exit();
                     break;
                 default:
-                    System.out.println("Nie ma tekiej opcji");
+                    printer.printLine("Nie ma takiej opcji, wprowadź ponownie: ");
             }
         } while (option != Option.EXIT);
-
-
     }
 
     private Option getOption() {
@@ -76,47 +69,31 @@ public class LibraryControl {
                 option = Option.createFromInt(dataReader.getInt());
                 optionOk = true;
             } catch (NoSuchOptionException e) {
-                printer.printLine(e.getMessage() + " ,podaj ponownie:");
-            } catch (InputMismatchException ignore) {
-                printer.printLine("Wprowadzono warość, która nie jest liczbą, podaj ponownie:");
+                printer.printLine(e.getMessage() + ", podaj ponownie:");
+            } catch (InputMismatchException ignored) {
+                printer.printLine("Wprowadzono wartość, która nie jest liczbą, podaj ponownie:");
             }
         }
+
         return option;
     }
 
     private void printOptions() {
-        System.out.println("Wybierz opcję: ");
-        for (Option value : Option.values()) {
-            System.out.println(value);
+        printer.printLine("Wybierz opcję: ");
+        for (Option option : Option.values()) {
+            printer.printLine(option.toString());
         }
     }
 
     private void addBook() {
-       try{
-           Book book = dataReader.readAndCreateBook();
-           library.addBooks(book);
-       }catch (InputMismatchException e){
-           printer.printLine("Nie udało się stworzyć książki, niepoprawne dane.");
-       }catch (ArrayIndexOutOfBoundsException e){
-           printer.printLine("Osiągnięto limit pojemności, nie można dodać kolejnej książki");
-       }
-    }
-
-    private void addMagazine() {
         try {
-            Magazine magazine = dataReader.readAndCreateMagazine();
-            library.addMagazine(magazine);
-        }catch (InputMismatchException e){
-            printer.printLine("Nie idało się stworzyć magazynum, niepoprawne dane.");
-        }catch (IndexOutOfBoundsException e){
-            printer.printLine("Osiągnięto limit pojemności, nie można dodać klejnego magayznu.");
+            Book book = dataReader.readAndCreateBook();
+            library.addBook(book);
+        } catch (InputMismatchException e) {
+            printer.printLine("Nie udało się utworzyć książki, niepoprawne dane");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printer.printLine("Osiągnięto limit pojemności, nie można dodać kolejnej książki");
         }
-
-    }
-
-    private void printMagazines() {
-        Publication[] publications = library.getPublications();
-        printer.printMagazines(publications);
     }
 
     private void printBooks() {
@@ -124,34 +101,47 @@ public class LibraryControl {
         printer.printBooks(publications);
     }
 
+    private void addMagazine() {
+        try {
+            Magazine magazine = dataReader.readAndCreateMagazine();
+            library.addMagazine(magazine);
+        } catch (InputMismatchException e) {
+            printer.printLine("Nie udało się utworzyć magazynu, niepoprawne dane");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printer.printLine("Osiągnięto limit pojemności, nie można dodać kolejnego magazynu");
+        }
+    }
+
+    private void printMagazines() {
+        Publication[] publications = library.getPublications();
+        printer.printMagazines(publications);
+    }
 
     private void exit() {
         try {
-            fileManager.ExportData(library);
-            printer.printLine("Export danych do pliku zakończony sukcesem.");
-        }catch (DataExportException e){
+            fileManager.exportData(library);
+            printer.printLine("Export danych do pliku zakończony powodzeniem");
+        } catch (DataExportException e) {
             printer.printLine(e.getMessage());
         }
-        dataReader.close(); // zamykamy strumień wejścia
+        dataReader.close();
         printer.printLine("Koniec programu, papa!");
     }
 
-
-    enum Option {
+    private enum Option {
         EXIT(0, "Wyjście z programu"),
         ADD_BOOK(1, "Dodanie książki"),
-        ADD_MAGAZINE(2, "Dodanie magazynu/gazety"),
+        ADD_MAGAZINE(2,"Dodanie magazynu/gazety"),
         PRINT_BOOKS(3, "Wyświetlenie dostępnych książek"),
         PRINT_MAGAZINES(4, "Wyświetlenie dostępnych magazynów/gazet");
 
         private int value;
         private String description;
 
-        Option(int value, String description) {
+        Option(int value, String desc) {
             this.value = value;
-            this.description = description;
+            this.description = desc;
         }
-
 
         @Override
         public String toString() {
@@ -161,10 +151,9 @@ public class LibraryControl {
         static Option createFromInt(int option) throws NoSuchOptionException {
             try {
                 return Option.values()[option];
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch(ArrayIndexOutOfBoundsException e) {
                 throw new NoSuchOptionException("Brak opcji o id " + option);
             }
         }
     }
-
 }
