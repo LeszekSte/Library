@@ -36,7 +36,7 @@ public class FileManagerBuilder {
             } catch (IllegalArgumentException e) {
                 printer.printLine("Nie obsługiwany typ danych");
             }
-        } while (typeOk);
+        } while (!typeOk);
         return result;
     }
 
