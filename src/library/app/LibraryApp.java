@@ -1,15 +1,12 @@
 package library.app;
 
-import library.io.DataReader;
-import library.model.Book;
-
 public class LibraryApp {
 
     private final static   String APP_NAME = "Biblioteka v11";
 
     public static void main(String[] args) {
         System.out.println(APP_NAME);
-        LibraryControl libControl = new LibraryControl();
+        LibraryControl libControl = new LibraryControl(library);
         libControl.controlLoop();
     }
 }

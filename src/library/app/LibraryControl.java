@@ -1,8 +1,12 @@
 package library.app;
 
+import library.exception.DataExportException;
+import library.exception.DataImportException;
 import library.exception.NoSuchOptionException;
 import library.io.ConsolePrinter;
 import library.io.DataReader;
+import library.io.file.FileManager;
+import library.io.file.FileManagerBuilder;
 import library.model.Book;
 import library.model.Library;
 import library.model.Magazine;
@@ -11,13 +15,24 @@ import library.model.Publication;
 import java.util.InputMismatchException;
 
 public class LibraryControl {
-
-
-    // zmienna do komunikacji z użytkownikiem
     private ConsolePrinter printer = new ConsolePrinter();
     private DataReader dataReader = new DataReader(printer);
-    // "biblioteka" przechowująca dane
-    private Library library = new Library();
+    private FileManager fileManager;
+
+    private Library library;
+
+    LibraryControl() {
+        fileManager = new FileManagerBuilder(printer, dataReader).build();
+        try {
+            library = fileManager.importData();
+            printer.printLine("Zaimportowane dane z pliku");
+        } catch (DataImportException e) {
+            printer.printLine(e.getMessage());
+            printer.printLine("Zainicjowano nową bazę.");
+            library = new Library();
+        }
+    }
+
 
     /*
      * Główna metoda programu, która pozwala na wybór opcji i interakcję
@@ -111,9 +126,14 @@ public class LibraryControl {
 
 
     private void exit() {
-        System.out.println("Koniec programu, papa!");
-        // zamykamy strumień wejścia
-        dataReader.close();
+        try {
+            fileManager.ExportData(library);
+            printer.printLine("Export danych do pliku zakończony sukcesem.");
+        }catch (DataExportException e){
+            printer.printLine(e.getMessage());
+        }
+        dataReader.close(); // zamykamy strumień wejścia
+        printer.printLine("Koniec programu, papa!");
     }
 
 
@@ -122,7 +142,7 @@ public class LibraryControl {
         ADD_BOOK(1, "Dodanie książki"),
         ADD_MAGAZINE(2, "Dodanie magazynu/gazety"),
         PRINT_BOOKS(3, "Wyświetlenie dostępnych książek"),
-        PRINT_MAGAZINES(4, "WYświetlenie dostępnych magazynów/gazet");
+        PRINT_MAGAZINES(4, "Wyświetlenie dostępnych magazynów/gazet");
 
         private int value;
         private String description;
@@ -131,7 +151,7 @@ public class LibraryControl {
             this.value = value;
             this.description = description;
         }
-        
+
 
         @Override
         public String toString() {

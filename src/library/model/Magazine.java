@@ -1,5 +1,6 @@
 package library.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 public class Magazine extends Publication {
