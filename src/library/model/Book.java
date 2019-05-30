@@ -3,6 +3,8 @@ package library.model;
 import java.util.Objects;
 
 public class Book extends Publication {
+
+    public static final String TYPE = "Książka";
     // Pola
     private String author;
     private int pages;
@@ -40,6 +42,18 @@ public class Book extends Publication {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @Override
+    public String toCsv() {
+        String srednik = ";";
+        return (TYPE + srednik) +
+                getTitle() + srednik +
+                getPublisher() + srednik +
+                getYear() + srednik +
+                author + srednik +
+                pages + srednik +
+                isbn + srednik;
     }
 
     @Override

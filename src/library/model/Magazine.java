@@ -6,6 +6,9 @@ import java.util.Objects;
 
 
     public class Magazine extends Publication {
+
+        public static final String TYPE = "Magazine";
+
         private int month;
         private int day;
         private String language;
@@ -34,6 +37,19 @@ import java.util.Objects;
         }
         public void setLanguage(String language) {
             this.language = language;
+        }
+
+
+        @Override
+        public String toCsv() {
+            String srednik = ";";
+            return (TYPE + srednik) +
+                    getTitle() + srednik +
+                    getPublisher() + srednik +
+                    getYear() + srednik +
+                    month + srednik +
+                    day + srednik +
+                    language + srednik;
         }
 
         @Override

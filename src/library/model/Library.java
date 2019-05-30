@@ -32,4 +32,7 @@ public class Library implements Serializable {
         publications[publicationsNumber] = publication;
         publicationsNumber++;
     }
+
+    public void addPubliction(Publication publication) {
+    }
 }
