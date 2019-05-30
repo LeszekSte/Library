@@ -7,7 +7,7 @@ import java.util.Objects;
 
     public class Magazine extends Publication {
 
-        public static final String TYPE = "Magazine";
+        public static final String TYPE = "Magazyn";
 
         private int month;
         private int day;

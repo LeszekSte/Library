@@ -18,7 +18,6 @@ public class CsvFileManager implements FileManager {
     @Override
     public void exportData(Library library) {
         Publication[] publications = library.getPublications();
-
         try (FileWriter fileWriter = new FileWriter(FILE_NAME);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             for (Publication publication : publications) {
@@ -42,8 +41,6 @@ public class CsvFileManager implements FileManager {
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + FILE_NAME);
         }
-
-
         return library;
     }
 
