@@ -2,6 +2,7 @@ package library.io.file;
 
 import library.exception.DataExportException;
 import library.exception.DataImportException;
+import library.exception.InvalidDataException;
 import library.model.Book;
 import library.model.Library;
 import library.model.Magazine;
@@ -32,14 +33,14 @@ public class CsvFileManager implements FileManager {
     @Override
     public Library importData() {
         Library library = new Library();
-        try(Scanner fileReader = new Scanner(new File(FILE_NAME))){
-            while (fileReader.hasNextLine()){
+        try (Scanner fileReader = new Scanner(new File(FILE_NAME))) {
+            while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
                 Publication publication = createObjectFromString(line);
-                library.addPubliction (publication);
+                library.addPublication(publication);
             }
         } catch (FileNotFoundException e) {
-            throw  new DataImportException("Brak pliku " + FILE_NAME);
+            throw new DataImportException("Brak pliku " + FILE_NAME);
         }
 
 
@@ -47,14 +48,14 @@ public class CsvFileManager implements FileManager {
     }
 
     private Publication createObjectFromString(String csvText) {
-        String [] split = csvText.split(";");
+        String[] split = csvText.split(";");
         String type = split[0];
-        if(Book.TYPE.equals(type)){
+        if (Book.TYPE.equals(type)) {
             return createBook(split);
-        }else if(Magazine.TYPE.equals(type)){
+        } else if (Magazine.TYPE.equals(type)) {
             return createMagazine(split);
         }
-
+        throw new InvalidDataException("Nieznany typ publikacji " + type);
     }
 
     private Book createBook(String[] data) {

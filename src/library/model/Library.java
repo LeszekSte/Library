@@ -17,15 +17,15 @@ public class Library implements Serializable {
         return result;
     }
 
-    public void addBook(Book book) {
-        addPublication(book);
-    }
+//    public void addBook(Book book) {
+//        addPublication(book);
+//    }
+//
+//    public void addMagazine(Magazine magazine) {
+//        addPublication(magazine);
+//    }
 
-    public void addMagazine(Magazine magazine) {
-        addPublication(magazine);
-    }
-
-    private void addPublication(Publication publication) {
+    public void addPublication(Publication publication) {
         if (publicationsNumber >= MAX_PUBLICATONS) {
             throw new ArrayIndexOutOfBoundsException("Max publications exceeded " + MAX_PUBLICATONS);
         }
@@ -33,6 +33,5 @@ public class Library implements Serializable {
         publicationsNumber++;
     }
 
-    public void addPubliction(Publication publication) {
-    }
+
 }
