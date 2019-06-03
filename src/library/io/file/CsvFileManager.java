@@ -14,7 +14,6 @@ import java.util.Scanner;
 public class CsvFileManager implements FileManager {
     private static final String FILE_NAME = "Library.csv";
 
-
     @Override
     public void exportData(Library library) {
         Publication[] publications = library.getPublications();
@@ -25,7 +24,7 @@ public class CsvFileManager implements FileManager {
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            throw new DataExportException("Bład zapisu danych " + FILE_NAME);
+            throw new DataExportException("Błąd zapisu danych do pliku " + FILE_NAME);
         }
     }
 
@@ -47,12 +46,12 @@ public class CsvFileManager implements FileManager {
     private Publication createObjectFromString(String csvText) {
         String[] split = csvText.split(";");
         String type = split[0];
-        if (Book.TYPE.equals(type)) {
+        if(Book.TYPE.equals(type)) {
             return createBook(split);
-        } else if (Magazine.TYPE.equals(type)) {
+        } else if(Magazine.TYPE.equals(type)) {
             return createMagazine(split);
         }
-        throw new InvalidDataException("Nieznany typ publikacji " + type);
+        throw new InvalidDataException("Nieznany typ publikacji: " + type);
     }
 
     private Book createBook(String[] data) {
@@ -74,4 +73,5 @@ public class CsvFileManager implements FileManager {
         String language = data[6];
         return new Magazine(title, publisher, language, year, month, day);
     }
+
 }
