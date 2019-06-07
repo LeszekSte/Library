@@ -4,9 +4,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public abstract class User implements Serializable {
+
+    public abstract String toCsv();
+
     private String firstName;
     private String lastName;
     private String pesel;
+
 
     public User(String firstName, String lastName, String pesel) {
         this.firstName = firstName;
