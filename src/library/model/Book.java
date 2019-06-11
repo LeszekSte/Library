@@ -3,8 +3,7 @@ package library.model;
 import java.util.Objects;
 
 public class Book extends Publication {
-
-    public static final String TYPE = "book";
+    public static final String TYPE = "Książka";
     // Pola
     private String author;
     private int pages;
@@ -46,19 +45,18 @@ public class Book extends Publication {
 
     @Override
     public String toCsv() {
-        String srednik = ";";
-        return (TYPE + srednik) +
-                getTitle() + srednik +
-                getPublisher() + srednik +
-                getYear() + srednik +
-                author + srednik +
-                pages + srednik +
-                isbn + srednik;
+        return (TYPE + ";") +
+                getTitle() + ";" +
+                getPublisher() + ";" +
+                getYear() + ";" +
+                author + ";" +
+                pages + ";" +
+                isbn + "";
     }
 
     @Override
     public String toString() {
-        return super.toString() + author + ", " + pages + ", " + isbn;
+        return super.toString() + ", " + author + ", " + pages + ", " + isbn;
     }
 
     @Override
