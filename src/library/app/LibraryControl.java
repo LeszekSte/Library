@@ -9,7 +9,9 @@ import library.io.DataReader;
 import library.io.file.FileManager;
 import library.io.file.FileManagerBuilder;
 import library.model.*;
+import library.model.comparator.AlphabeticalTitleComparator;
 
+import java.util.Comparator;
 import java.util.InputMismatchException;
 
 class LibraryControl {
@@ -69,7 +71,12 @@ class LibraryControl {
     }
 
     private void printUsers() {
-        printer.printUsers(library.getUsers().values());
+        printer.printUsers(library.getSortetUser(new Comparator<LibraryUser>() {
+            @Override
+            public int compare(LibraryUser l1, LibraryUser l2) {
+                return l1.getLastName().compareToIgnoreCase(l2.getLastName());
+            }
+        }));
     }
 
     private void addUser() {
@@ -82,11 +89,11 @@ class LibraryControl {
     }
 
     private void printMagazines() {
-        printer.printMagazines(library.getPublications().values());
+        printer.printMagazines(library.getSortetPublication(new AlphabeticalTitleComparator()));
     }
 
     private void printBooks() {
-        printer.printBooks(library.getPublications().values());
+        printer.printBooks(library.getSortetPublication(new AlphabeticalTitleComparator()));
     }
 
     private void deleteBooks() {
